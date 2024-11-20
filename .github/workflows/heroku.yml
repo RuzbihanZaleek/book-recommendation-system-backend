@@ -23,7 +23,7 @@ jobs:
       - name: Run tests
         run: npm test -- --passWithNoTests
 
-      - name: Install Heroku CLI 
+      - name: Install Heroku CLI
         run: |
           curl https://cli-assets.heroku.com/install.sh | sh
 
