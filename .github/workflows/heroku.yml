@@ -29,7 +29,7 @@ jobs:
 
       - name: Heroku Login
         run: |
-          echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
+          echo ${{ secrets.HEROKU_API_KEY }} | heroku login -i
 
       - name: Deploy to Heroku
         run: |
