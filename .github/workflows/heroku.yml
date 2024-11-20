@@ -27,10 +27,6 @@ jobs:
         run: |
           curl https://cli-assets.heroku.com/install.sh | sh
 
-      # - name: Heroku Login
-      #   run: |
-      #     echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
-
       - name: Set up Heroku authentication
         run: |
           echo "machine git.heroku.com" > ~/.netrc
@@ -42,4 +38,4 @@ jobs:
       - name: Deploy to Heroku
         run: |
           git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
-          git push heroku main
+          git push heroku main --force
