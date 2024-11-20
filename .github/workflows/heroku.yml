@@ -29,7 +29,7 @@ jobs:
 
       - name: Heroku Login
         run: |
-          echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
+          echo HRKU-d79d4b0c-2dee-4853-b71c-a18692b7e0a1 | heroku auth:token
 
       - name: Deploy to Heroku
         run: |
