@@ -34,8 +34,14 @@ jobs:
           echo "  password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
           chmod 600 ~/.netrc
 
+      - name: Unshallow the repository
+        run: |
+          git fetch --all --unshallow
 
-      - name: Deploy to Heroku
+      - name: Set Heroku remote
         run: |
           git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+      
+      - name: Deploy to Heroku
+        run: |
           git push heroku main --force
