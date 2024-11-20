@@ -27,18 +27,8 @@ jobs:
         run: |
           curl https://cli-assets.heroku.com/install.sh | sh
 
-      - name: Check if API key is available
-        run: |
-          if [ -z "${{ secrets.HEROKU_API_KEY }}" ]; then
-            echo "Heroku API key is not set"
-            exit 1
-          else
-            echo "Heroku API key is set successfully."
-          fi
-
       - name: Heroku Login
         run: |
-          echo "Logging into Heroku with API key ${{ secrets.HEROKU_API_KEY }}..."
           echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
 
       - name: Deploy to Heroku
