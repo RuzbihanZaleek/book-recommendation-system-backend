@@ -23,15 +23,17 @@ jobs:
       - name: Run tests
         run: npm test -- --passWithNoTests
 
-      - name: Install Heroku CLI
-        run: |
-          curl https://cli-assets.heroku.com/install.sh | sh
+      # - name: Install Heroku CLI
+      #   run: |
+      #     curl https://cli-assets.heroku.com/install.sh | sh
 
-      - name: Heroku Login
-        run: |
-          echo HRKU-d79d4b0c-2dee-4853-b71c-a18692b7e0a1 | heroku auth:token
+      # - name: Heroku Login
+      #   run: |
+      #     echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
 
       - name: Deploy to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
           git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
           git push heroku main
