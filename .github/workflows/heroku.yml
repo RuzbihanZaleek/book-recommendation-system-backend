@@ -15,7 +15,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install
@@ -27,6 +27,15 @@ jobs:
         run: |
           curl https://cli-assets.heroku.com/install.sh | sh
 
+      - name: Check if API key is available
+        run: |
+          if [ -z "${{ secrets.HEROKU_API_KEY }}" ]; then
+            echo "Heroku API key is not set"
+            exit 1
+          else
+            echo "Heroku API key is set successfully."
+          fi
+
       - name: Heroku Login
         run: |
           echo "Logging into Heroku with API key ${{ secrets.HEROKU_API_KEY }}..."
@@ -36,4 +45,3 @@ jobs:
         run: |
           git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
           git push heroku main
-
