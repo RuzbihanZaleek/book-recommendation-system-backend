@@ -24,7 +24,7 @@ jobs:
         run: npm test
 
       - name: Heroku Login
-        uses: akshnz/heroku-login-action@v1.0.0
+        uses: akshnz/heroku-cli-action@v
         with:
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
