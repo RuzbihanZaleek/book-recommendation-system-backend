@@ -31,7 +31,7 @@ jobs:
       #   run: |
       #     echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
 
-      - name: Deploy to Heroku
+      - name: Deploy to Heroku 
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
