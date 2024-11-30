@@ -1,9 +1,7 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-const User = require('./User');
-const Book = require('./Book');
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/database");
 
-const Review = sequelize.define('Review', {
+const Review = sequelize.define("Reviews", {
   content: {
     type: DataTypes.TEXT,
     allowNull: false,
@@ -16,9 +14,22 @@ const Review = sequelize.define('Review', {
       max: 5,
     },
   },
+  UserId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'Users',
+      key: 'id',
+    },
+  },
+  BookId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'Books',
+      key: 'id',
+    },
+  },
 });
-
-Review.belongsTo(User);
-Review.belongsTo(Book);
 
 module.exports = Review;
