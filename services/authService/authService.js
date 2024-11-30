@@ -1,7 +1,7 @@
-const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 const isValidEmail = require("../../utils/emailValidation");
 const { AUTH, USER } = require("../../constants/constants");
+const User = require("../../models/User");
 
 const signupService = async (username, email, password) => {
   try {
@@ -33,9 +33,13 @@ const signupService = async (username, email, password) => {
 
 const loginService = async (email, password) => {
   try {
+    if (!email || !password) {
+      return { status: 400, message: AUTH.MISSING_LOGIN_PARAMS, data: null };
+    }
+
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      return { status: 401, message: AUTH.INVALID_EMAIL, data: null };
+      return { status: 401, message: AUTH.INVALID_CREDENTIALS, data: null };
     }
 
     const isPasswordValid = await user.isValidPassword(password);
