@@ -5,7 +5,7 @@ const {
   loginService,
 } = require("../../services/authService/authService");
 
-exports.signup = async (req, res) => {
+const signup = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
@@ -17,7 +17,7 @@ exports.signup = async (req, res) => {
   }
 };
 
-exports.login = async (req, res) => {
+const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -27,4 +27,9 @@ exports.login = async (req, res) => {
     console.error(err.message);
     sendResponse(res, 500, AUTH.LOGIN_FAIL, null);
   }
+};
+
+module.exports = {
+  signup,
+  login,
 };
