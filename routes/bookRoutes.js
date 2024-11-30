@@ -1,24 +1,20 @@
 const express = require("express");
+const {
+  getAllBooks,
+  createBook,
+  getBookById,
+  updateBook,
+  deleteBook,
+  searchBooks,
+} = require("../controllers/bookController/bookController");
+const authenticate = require("../middlewares/authMiddleware");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("Get all books");
-});
-
-router.post("/", (req, res) => {
-  res.send("Add a new book");
-});
-
-router.get("/:id", (req, res) => {
-  res.send(`Get book with ID: ${req.params.id}`);
-});
-
-router.put("/:id", (req, res) => {
-  res.send(`Update book with ID: ${req.params.id}`);
-});
-
-router.delete("/:id", (req, res) => {
-  res.send(`Delete book with ID: ${req.params.id}`);
-});
+router.get("/", authenticate, getAllBooks);
+router.get("/search", authenticate, searchBooks);
+router.get("/:id", authenticate, getBookById);
+router.post("/", authenticate, createBook);
+router.put("/:id", authenticate, updateBook);
+router.delete("/:id", authenticate, deleteBook);
 
 module.exports = router;
